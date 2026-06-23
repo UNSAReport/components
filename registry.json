@@ -1,10 +1,7 @@
 {
-  "version": "1.0.0",
   "components": {
     "code-block": {
       "description": "Syntax highlighted code layout engine with snippet slicing.",
-      "repo": "UNSAReport/components",
-      "ref": "main",
       "dist-tags": {
         "latest": "1.0.0"
       },
@@ -17,8 +14,6 @@
     },
     "lab-section": {
       "description": "Custom callout grid block for laboratory steps.",
-      "repo": "UNSAReport/components",
-      "ref": "main",
       "dist-tags": {
         "latest": "1.0.0"
       },
@@ -31,8 +26,6 @@
     },
     "page-header": {
       "description": "UNSA/EPIS university header with logos and metadata.",
-      "repo": "UNSAReport/components",
-      "ref": "main",
       "dist-tags": {
         "latest": "1.0.0"
       },
@@ -45,8 +38,6 @@
     },
     "basic-info-table": {
       "description": "Standard lab report metadata information table.",
-      "repo": "UNSAReport/components",
-      "ref": "main",
       "dist-tags": {
         "latest": "1.0.0"
       },
