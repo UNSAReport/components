@@ -47,6 +47,18 @@
           "dependencies": []
         }
       }
+    },
+    "cover-page": {
+      "description": "Standard cover page for academic reports and activities.",
+      "dist-tags": {
+        "latest": "1.0.0"
+      },
+      "versions": {
+        "1.0.0": {
+          "path": "components/templates/simple-report/cover-page/1.0.0/cover-page.typ",
+          "dependencies": []
+        }
+      }
     }
   }
 }
