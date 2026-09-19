@@ -1,0 +1,31 @@
+[package]
+name = "@unsareport/epis-lab"
+version = "0.1.0"
+displayName = "EPIS Lab Report Template & Layout"
+description = "UNSA EPIS laboratory report format, basic info table, sections, and post-build report copy hook"
+tags = ["epis", "lab", "report"]
+command_prefix = "epis-lab"
+
+[components]
+files = ["lib.typ", "scripts/**/*"]
+depends_on = [
+  "@unsareport/epis-lab-theming ^0.1.0",
+  "@unsareport/define ^0.1.0",
+  "@unsareport/gdocs-code-block ^0.1.0"
+]
+
+[templates]
+files = ["template/**/*"]
+
+[commands.copy-report]
+description = "Copy compiled report to a formatted filename based on exported metadata"
+commands = { any = ["uv run components/@unsareport/epis-lab/scripts/copy_report.py"] }
+
+[hooks-suggest]
+build = ["copy-report"]
+
+[config-schema.filename_format]
+type = "string"
+required = false
+default = "{shortnames_chain} - {course_abbr} - LAB {lab_number}.pdf"
+doc = "Format string for renaming compiled report. Tokens: {course_name}, {course_abbr}, {lab_number}, {shortnames_chain}, {year}, etc."

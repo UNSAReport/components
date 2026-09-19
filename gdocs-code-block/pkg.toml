@@ -1,0 +1,14 @@
+[package]
+name = "@unsareport/gdocs-code-block"
+version = "0.1.0"
+displayName = "Google Docs Styled Code Block"
+description = "Code block container with Google Docs styling and snippet extraction"
+tags = ["code", "snippets"]
+command_prefix = "gdocs-code-block"
+
+[components]
+files = ["lib.typ"]
+depends_on = []
+
+[templates]
+files = []
