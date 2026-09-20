@@ -1,13 +1,13 @@
 [package]
 name = "@unsareport/define"
-version = "0.1.0"
+version = "0.1.1"
 displayName = "Report Variable Define & Export"
 description = "Minimal utilities for exporting metadata variables from Typst documents"
 tags = ["metadata", "utilities"]
 command_prefix = "define"
 
 [components]
-files = ["lib.typ"]
+files = ["lib.typ", "scripts/**/*"]
 depends_on = []
 
 [templates]

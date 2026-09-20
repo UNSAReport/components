@@ -8,8 +8,6 @@
   members: (
     "Nombre del Estudiante",
   ),
-  logo-epis: image("img/epis.png", width: 95%),
-  logo-abet: image("img/abet.png", width: 97%),
   custom_variables: (
     course_abbr: "CAS",
     shortnames_chain: "ESTUDIANTE",

@@ -7,7 +7,7 @@ tags = ["epis", "lab", "report"]
 command_prefix = "epis-lab"
 
 [components]
-files = ["lib.typ", "scripts/**/*"]
+files = ["lib.typ", "scripts/**/*", "img/**/*", "tsconfig.json"]
 depends_on = [
   "@unsareport/epis-lab-theming ^0.1.0",
   "@unsareport/define ^0.1.0",
@@ -18,14 +18,13 @@ depends_on = [
 files = ["template/**/*"]
 
 [commands.copy-report]
-description = "Copy compiled report to a formatted filename based on exported metadata"
-commands = { any = ["uv run components/@unsareport/epis-lab/scripts/copy_report.py"] }
+description = "Copy compiled report to a formatted filename based on exported metadata (reads UNSAREP_CONFIG_EPIS_LAB_FILENAME_FORMAT)"
+commands = { any = ["bun components/@unsareport/epis-lab/scripts/copy_report.ts"] }
 
 [hooks-suggest]
 build = ["copy-report"]
 
 [config-schema.filename_format]
 type = "string"
-required = false
-default = "{shortnames_chain} - {course_abbr} - LAB {lab_number}.pdf"
-doc = "Format string for renaming compiled report. Tokens: {course_name}, {course_abbr}, {lab_number}, {shortnames_chain}, {year}, etc."
+required = true
+doc = "Format string for renaming compiled report. Tokens: {course_name}, {course_abbr}, {lab_number}, {shortnames_chain}, {year}, etc. Passed to the copy-report hook as UNSAREP_CONFIG_EPIS_LAB_FILENAME_FORMAT."

@@ -31,7 +31,10 @@
   )
 }
 
-#let page-header(logo-epis: none, logo-abet: none) = block(
+#let default-logo-epis = image("img/epis.png", width: 95%)
+#let default-logo-abet = image("img/abet.png", width: 97%)
+
+#let page-header(logo-epis: default-logo-epis, logo-abet: default-logo-abet) = block(
   width: 100%,
   inset: (bottom: header-spacing-bottom),
 )[
@@ -129,8 +132,8 @@
   presentation_date: none,
   sem_code: none,
   presentation_hour: "11:59:00",
-  logo-epis: none,
-  logo-abet: none,
+  logo-epis: default-logo-epis,
+  logo-abet: default-logo-abet,
   custom_variables: (:),
   body,
 ) = {
