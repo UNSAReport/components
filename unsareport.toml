@@ -1,0 +1,7 @@
+[project]
+config_version = 1
+
+[scope]
+name = "@unsareport"
+description = "Official UNSAReport component library and styling"
+files = ["tsconfig.json"]

@@ -1,3 +1,6 @@
+[project]
+config_version = 1
+
 [package]
 name = "@unsareport/define"
 version = "0.1.1"
@@ -8,7 +11,6 @@ command_prefix = "define"
 
 [components]
 files = ["lib.typ", "scripts/**/*"]
-depends_on = []
 
 [templates]
 files = []

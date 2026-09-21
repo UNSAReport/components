@@ -1,3 +1,6 @@
+[project]
+config_version = 1
+
 [package]
 name = "@unsareport/epis-lab"
 version = "0.1.0"
@@ -6,13 +9,13 @@ description = "UNSA EPIS laboratory report format, basic info table, sections, a
 tags = ["epis", "lab", "report"]
 command_prefix = "epis-lab"
 
+[dependencies]
+"@unsareport/define" = "^0.1.0"
+"@unsareport/epis-lab-theming" = "^0.1.0"
+"@unsareport/gdocs-code-block" = "^0.1.0"
+
 [components]
-files = ["lib.typ", "scripts/**/*", "img/**/*", "tsconfig.json"]
-depends_on = [
-  "@unsareport/epis-lab-theming ^0.1.0",
-  "@unsareport/define ^0.1.0",
-  "@unsareport/gdocs-code-block ^0.1.0"
-]
+files = ["lib.typ", "scripts/**/*", "img/**/*"]
 
 [templates]
 files = ["template/**/*"]
