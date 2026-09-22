@@ -3,7 +3,7 @@ config_version = 1
 
 [package]
 name = "@unsareport/epis-lab"
-version = "0.1.0"
+version = "0.1.1"
 displayName = "EPIS Lab Report Template & Layout"
 description = "UNSA EPIS laboratory report format, basic info table, sections, and post-build report copy hook"
 tags = ["epis", "lab", "report"]
@@ -24,10 +24,11 @@ files = ["template/**/*"]
 description = "Copy compiled report to a formatted filename based on exported metadata (reads UNSAREP_CONFIG_EPIS_LAB_FILENAME_FORMAT)"
 commands = { any = ["bun components/@unsareport/epis-lab/scripts/copy_report.ts"] }
 
-[hooks-suggest]
-build = ["copy-report"]
+[hooks.build]
+after = ["copy-report"]
 
 [config-schema.filename_format]
 type = "string"
 required = true
+default = "{course_abbr} - LAB{lab_number} - {shortnames_chain}.pdf"
 doc = "Format string for renaming compiled report. Tokens: {course_name}, {course_abbr}, {lab_number}, {shortnames_chain}, {year}, etc. Passed to the copy-report hook as UNSAREP_CONFIG_EPIS_LAB_FILENAME_FORMAT."
