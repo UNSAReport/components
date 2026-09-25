@@ -30,4 +30,4 @@ const vars = await readVars(rootDir, entryFile);
 // { course_abbr: "CAS", members: "Ana, Luis", ... }
 ```
 
-Array values join with `", "`. The `<var_export>` wire shape is owned here — hook scripts must not re-implement the `typst query` call. Fails fast when `typst` is missing, the query fails, or output is not a JSON list.
+Array values join with `", "`. The `<var_export>` wire shape is owned here — hook scripts must not re-implement the `typst eval` call. Fails fast when `typst` is missing, the evaluation fails, or output is not a JSON list.

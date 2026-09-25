@@ -1,12 +1,11 @@
-/// Shared var reader for `@unsareport/define`.
-///
-/// Runs `typst query` over a report entry file and returns the exported
-/// `<var_export>` vars as a string dict (array values joined with `", "`).
-/// The wire shape (`<var_export>` items shaped by `define()`'s
-/// `metadata((name, value))` payload) is owned here so hook scripts never
-/// re-implement the query.
-
 export const METADATA_LABEL = "<var_export>";
+export const METADATA_EVAL_EXPR = `query(${METADATA_LABEL}).map(it => it.value)`;
+
+const TYPST_BINARY = "typst";
+const EVAL_SUBCOMMAND = "eval";
+const IN_FLAG = "--in";
+const ROOT_FLAG = "--root";
+const ARRAY_JOIN_SEPARATOR = ", ";
 
 type QueryItem = {
   name?: unknown;
@@ -17,18 +16,17 @@ export async function readVars(
   rootDir: string,
   entryFile: string,
 ): Promise<Record<string, string>> {
-  if (Bun.which("typst") === null) {
-    throw new Error("Could not find 'typst' executable on PATH");
+  if (Bun.which(TYPST_BINARY) === null) {
+    throw new Error(`Could not find '${TYPST_BINARY}' executable on PATH`);
   }
   const proc = Bun.spawn(
     [
-      "typst",
-      "query",
+      TYPST_BINARY,
+      EVAL_SUBCOMMAND,
+      METADATA_EVAL_EXPR,
+      IN_FLAG,
       entryFile,
-      METADATA_LABEL,
-      "--field",
-      "value",
-      "--root",
+      ROOT_FLAG,
       rootDir,
     ],
     { cwd: rootDir, stdout: "pipe", stderr: "pipe" },
@@ -39,7 +37,7 @@ export async function readVars(
     proc.exited,
   ]);
   if (code !== 0) {
-    throw new Error(`Typst query failed (code ${code}): ${stderr.trim()}`);
+    throw new Error(`Typst eval failed (code ${code}): ${stderr.trim()}`);
   }
   const text = stdout.trim();
   if (text === "") {
@@ -50,7 +48,7 @@ export async function readVars(
     data = JSON.parse(text);
   } catch (err) {
     throw new Error(
-      `Failed to parse JSON from typst query: ${err}\nOutput: ${text}`,
+      `Failed to parse JSON from typst eval: ${err}\nOutput: ${text}`,
     );
   }
   if (!Array.isArray(data)) {
@@ -63,7 +61,7 @@ export async function readVars(
     }
     const value = item.value;
     metadata[String(item.name)] = Array.isArray(value)
-      ? value.map((v) => String(v)).join(", ")
+      ? value.map((v) => String(v)).join(ARRAY_JOIN_SEPARATOR)
       : String(value);
   }
   return metadata;
