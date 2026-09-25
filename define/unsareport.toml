@@ -3,7 +3,7 @@ config_version = 1
 
 [package]
 name = "@unsareport/define"
-version = "0.1.2"
+version = "0.1.3"
 displayName = "Report Variable Define & Export"
 description = "Minimal utilities for exporting metadata variables from Typst documents"
 tags = ["metadata", "utilities"]
