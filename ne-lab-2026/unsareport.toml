@@ -1,0 +1,32 @@
+[project]
+config_version = 1
+
+[package]
+name = "@unsareport/ne-lab-2026"
+version = "0.1.0"
+displayName = "NE Lab 2026 Report Template & Layout"
+description = "Plantilla e infraestructura de informes de Negocios Electrónicos (UNSA) con sangría jerárquica y renombrado automático post-build"
+tags = ["unsa", "ne", "negocios-electronicos", "report", "template"]
+command_prefix = "ne-lab-2026"
+
+[dependencies]
+"@unsareport/define" = "^0.1.0"
+
+[components]
+files = ["lib.typ", "scripts/**/*", "img/**/*"]
+
+[templates]
+files = ["template/**/*"]
+
+[commands.copy-report]
+description = "Copy compiled report to a formatted filename based on exported metadata (reads UNSAREP_CONFIG_NE_LAB_2026_FILENAME_FORMAT)"
+commands = { any = ["bun components/@unsareport/ne-lab-2026/scripts/copy_report.ts"] }
+
+[hooks.build]
+after = ["copy-report"]
+
+[config-schema.filename_format]
+type = "string"
+required = true
+default = "NE Grupo {group} Subgrupo {subgroup} - Sesión {session_number} {deliverable_number} - Inv For {year} {semester} INF - Informe Entregable e Informe Investigación Formativa - {topic} - {authors_short}.pdf"
+doc = "Format string for renaming compiled report. Tokens: {group}, {subgroup}, {session_number}, {deliverable_number}, {year}, {semester}, {delivery_type}, {topic}, {stage}, {authors_short}, {course}, etc. Passed to the copy-report hook as UNSAREP_CONFIG_NE_LAB_2026_FILENAME_FORMAT."

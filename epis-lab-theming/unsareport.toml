@@ -3,7 +3,7 @@ config_version = 1
 
 [package]
 name = "@unsareport/epis-lab-theming"
-version = "0.1.0"
+version = "0.1.1"
 displayName = "EPIS Lab Theming"
 description = "Theme variables, colors, typography, and geometry for EPIS lab reports"
 tags = ["theme", "epis", "lab"]

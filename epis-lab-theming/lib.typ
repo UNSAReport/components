@@ -8,7 +8,7 @@
 #let code-bg-color = rgb("#F1F3F4")
 
 // Typography & Document Geometry
-#let font-family = "Lato"
+#let font-family = ("Carlito", "Calibri")
 #let font-lang = "es"
 #let page-paper = "a4"
 #let page-margin = (

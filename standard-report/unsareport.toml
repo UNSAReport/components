@@ -1,0 +1,33 @@
+[project]
+config_version = 1
+
+[package]
+name = "@unsareport/standard-report"
+version = "0.1.0"
+displayName = "UNSA Standard Report Template & Layout"
+description = "Plantilla estándar de informes académicos UNSA con portada institucional, sangría jerárquica contextual y renombrado automático post-build"
+tags = ["unsa", "report", "template", "standard"]
+command_prefix = "standard-report"
+
+[dependencies]
+"@unsareport/define" = "^0.1.0"
+"@unsareport/standard-report-theming" = "^0.1.0"
+
+[components]
+files = ["lib.typ", "scripts/**/*", "img/**/*"]
+
+[templates]
+files = ["template/**/*"]
+
+[commands.copy-report]
+description = "Copy compiled report to a formatted filename based on exported metadata (reads UNSAREP_CONFIG_STANDARD_REPORT_FILENAME_FORMAT)"
+commands = { any = ["bun components/@unsareport/standard-report/scripts/copy_report.ts"] }
+
+[hooks.build]
+after = ["copy-report"]
+
+[config-schema.filename_format]
+type = "string"
+required = true
+default = "{course_abbr} - {activity_number} - {group} - Informe.pdf"
+doc = "Format string for renaming compiled report. Tokens: {course_abbr}, {course}, {activity_number}, {activity_type}, {group}, {authors_short}, {year}, {title}, etc. Passed to the copy-report hook as UNSAREP_CONFIG_STANDARD_REPORT_FILENAME_FORMAT."
